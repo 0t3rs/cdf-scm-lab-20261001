@@ -1,0 +1,4 @@
+dumb-http/objects/** -text
+dumb-http/HEAD text eol=lf
+dumb-http/info/refs text eol=lf
+dumb-http/objects/info/packs text eol=lf
