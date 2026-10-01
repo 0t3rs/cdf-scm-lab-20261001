@@ -1,0 +1,3 @@
+[submodule "cdf-submodule-canary"]
+	path = cdf-submodule-canary
+	url = http://127.0.0.1:1/cdf-submodule-canary.git
