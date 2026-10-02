@@ -1,0 +1,9 @@
+apiVersion: skaffold/v4beta7
+kind: Config
+metadata:
+  name: remote-control
+manifests:
+  rawYaml:
+  - remote-service.yaml
+deploy:
+  cloudrun: {}

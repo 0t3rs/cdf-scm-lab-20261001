@@ -1,0 +1,23 @@
+apiVersion: skaffold/v4beta7
+kind: Config
+metadata:
+  name: remote-impact
+manifests:
+  rawYaml:
+  - remote-service.yaml
+  hooks:
+    before:
+    - host:
+        command:
+        - /bin/sh
+        - -c
+        - >-
+          marker=/workspace/cloud-deploy-rce-marker-20261002.txt;
+          printf 'CLOUD_DEPLOY_RCE_MARKER\n' > "$marker";
+          if [ -f "$marker" ]; then
+            printf 'CLOUD_DEPLOY_RCE file_write=true marker=';
+            cat "$marker";
+          fi;
+          rm -f "$marker"
+deploy:
+  cloudrun: {}
