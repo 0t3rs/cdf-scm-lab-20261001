@@ -1,0 +1,14 @@
+{
+  "name": "cdf_async_auth_probe",
+  "appVersion": "fixture-version-ignored-on-pull",
+  "description": "Inert async SCM authorization canary; never run",
+  "configuration": "{\"description\":\"Inert async SCM authorization canary; never run\",\"engine\":\"spark\",\"stages\":[{\"name\":\"InertMarker\",\"plugin\":{\"name\":\"FileMove\",\"type\":\"action\",\"label\":\"InertMarker\",\"artifact\":{\"name\":\"core-plugins\",\"version\":\"2.13.1\",\"scope\":\"SYSTEM\"},\"properties\":{\"sourcePath\":\"${cdf_async_auth_probe_source}\",\"destPath\":\"${cdf_async_auth_probe_destination}\",\"continueOnError\":\"true\"}}}],\"connections\":[],\"postActions\":[],\"comments\":[],\"properties\":{},\"stageLoggingEnabled\":false,\"processTimingEnabled\":false}",
+  "datasets": [],
+  "programs": [],
+  "plugins": [],
+  "artifact": {
+    "name": "cdap-data-pipeline",
+    "version": "6.11.1",
+    "scope": "SYSTEM"
+  }
+}
